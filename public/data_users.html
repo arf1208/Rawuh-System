@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Pengguna - SMK NU LAMONGAN</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar">
+            <h3>Menu Admin</h3>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="data_users.html" class="active"><i class="fas fa-users"></i> Manajemen Siswa</a></li>
+                <li><a href="data_users.html" class="active"><i class="fas fa-users"></i> Manajemen Guru</a></li>
+                <li><a href="rekap_absensi.html"><i class="fas fa-file-excel"></i> Rekap Absensi</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <div id="content">
+            <h2><i class="fas fa-users"></i> Manajemen Data Pengguna</h2>
+            <p id="status-msg" style="color: green;"></p>
+            <hr>
 
+            <div class="row">
+                <div class="col-8">
+                    <button class="btn btn-success" id="btn-show-add-form">
+                        <i class="fas fa-plus"></i> Tambah Pengguna Baru
+                    </button>
+
+                    <div id="user-form-container" style="display:none; margin-top: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                        <h3>Form Pengguna</h3>
+                        <form id="user-form">
+                            <div class="form-group">
+                                <label for="input-rfid-uid">UID RFID *</label>
+                                <input type="text" id="input-rfid-uid" required placeholder="Tap kartu atau klik log di samping">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-nama">Nama Lengkap</label>
+                                <input type="text" id="input-nama" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-role">Role</label>
+                                <select id="input-role" required>
+                                    <option value="siswa">Siswa</option>
+                                    <option value="guru">Guru</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-nisnip">NIS / NIP</label>
+                                <input type="text" id="input-nisnip">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-kelasjabatan">Kelas / Jabatan</label>
+                                <input type="text" id="input-kelasjabatan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-nowa">No. WhatsApp (Contoh: 0812xxxxxx)</label>
+                                <input type="text" id="input-nowa" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Pengguna</button>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('user-form-container').style.display='none'">Batal</button>
+                        </form>
+                    </div>
+                    
+                    <h4 style="margin-top: 30px;">Daftar Pengguna Aktif</h4>
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Role</th>
+                                    <th>UID RFID</th>
+                                    <th>Kelas/Jabatan</th>
+                                    <th>No. WA</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card p-3 border-warning">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Log Kartu Baru</h4>
+                        <p style="font-size: 0.9em; color: #888;">UID yang terdeteksi tapi belum terdaftar:</p>
+                        <div id="unknown-uid-log" style="max-height: 400px; overflow-y: auto;">
+                            <p>Loading log...</p>
+                        </div>
+                        <small>*Klik UID untuk mengisi form pendaftaran.</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/admin.js"></script>
+    <script>
+        // Panggil fungsi loadUsersRealtime saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadUsersRealtime);
+        document.getElementById('btn-show-add-form').addEventListener('click', () => {
+             document.getElementById('user-form-container').style.display='block';
+        });
+
+        // Fungsi yang dipanggil dari admin.js saat klik log UID
+        function fillFormWithUid(uid) {
+            document.getElementById('input-rfid-uid').value = uid;
+            document.getElementById('user-form-container').style.display='block';
+            document.getElementById('input-nama').focus();
+        }
+    </script>
+</body>
+</html>
