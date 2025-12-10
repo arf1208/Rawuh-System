@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar">
+            <h3>Menu Admin</h3>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="data_users.html">Manajemen Siswa</a></li>
+                <li><a href="data_users.html">Manajemen Guru</a></li>
+                <li><a href="rekap_absensi.html">Rekap Absensi</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div id="content">
+            <h2>Selamat Datang, Admin!</h2>
+            <hr>
+            
+            <div class="stats-cards">
+                <div class="card">
+                    <h4>Total Hadir Hari Ini</h4>
+                    <p id="total-hadir">0</p>
+                </div>
+                <div class="card">
+                    <h4>Total Terlambat</h4>
+                    <p id="total-terlambat">0</p>
+                </div>
+                <div class="card">
+                    <h4>Log Absensi Terakhir</h4>
+                    <ul id="live-log">
+                        </ul>
+                </div>
+            </div>
 
+            </div>
+    </div>
+    <script src="js/admin.js"></script>
+    <script>
+        // Panggil fungsi loadDashboardRealtime dari admin.js saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadDashboardRealtime);
+    </script>
+</body>
+</html>
