@@ -1,5 +1,4 @@
-# ⚡ Absensi RFID Serverless Real-time | SMK NU LAMONGAN 🕌
-
+# ⚡ Absensi RFID Serverless Real-time | SMK NU LAMONGAN 🏛👨‍🎓👩🏻‍🎓👨🏻‍🏫👩🏻‍🏫
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AriefRahman/absensi-rfid-smknu/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/AriefRhaman/absensi-rfid-smknu.svg?style=social)](https://github.com/AriefRahman/absensi-rfid-smknu/stargazers)
 [![Firebase Deployment](https://img.shields.io/badge/Deployed%20on-Firebase-FFA611?style=flat&logo=firebase)](https://firebase.google.com/)
